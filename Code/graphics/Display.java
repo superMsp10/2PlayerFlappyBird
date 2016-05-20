@@ -1,9 +1,6 @@
 package graphics;
-
-
-
-
 import java.util.Random;
+import Code.MainFile;
 
 
 
@@ -14,7 +11,7 @@ public class Display {
  public int yOffSet;
 
  public Display() {
-  pixels = new int[Main.WIDTH * Main.HEIGHT];
+  pixels = new int[MainFile.WIDTH * MainFile.HEIGHT];
   random = new Random();
  }
 
@@ -27,9 +24,9 @@ public class Display {
 
  public void testRender() {
 
-  for (int y = 0; y < Main.HEIGHT; y++) {
-   for (int x = 0; x < Main.WIDTH; x++) {
-    pixels[x + y * Main.WIDTH] = random.nextInt();
+  for (int y = 0; y < MainFile.HEIGHT; y++) {
+   for (int x = 0; x < MainFile.WIDTH; x++) {
+    pixels[x + y * MainFile.WIDTH] = random.nextInt();
    }
 
   }
