@@ -43,6 +43,7 @@ public class MainFile extends Canvas implements Runnable {
       main.frame.pack();
       main.frame.setLocationRelativeTo(null);
       main.frame.setVisible(true);
+      main.frame.setTitle("2PlayerFlappyBird");
       main.start();
      
   
@@ -52,6 +53,7 @@ public class MainFile extends Canvas implements Runnable {
     Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
     setPreferredSize(size);
     frame = new JFrame();
+    SCREEN = new Display();
 
     
   }
