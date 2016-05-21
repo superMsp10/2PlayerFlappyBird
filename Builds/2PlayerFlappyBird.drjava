@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<drjava version="drjava-20140826-r5761">
+  <project autorefresh="false" build="../Builds/" main="MainFile" root="" work="">
+    <createjar file=""/>
+    <source>
+      <file active="true" name="MainFile.java" package="Code" timestamp="20-May-2016 14:54:11">
+        <select from="1440" to="1440"/>
+        <scroll column="280" row="0"/>
+      </file>
+      <file name="graphics/Display.java" package="graphics" timestamp="20-May-2016 13:53:21">
+        <select from="1440" to="1440"/>
+        <scroll column="280" row="0"/>
+      </file>
+    </source>
+    <included/>
+    <excluded/>
+    <collapsed/>
+    <classpath/>
+    <breakpoints/>
+    <watches/>
+    <bookmarks/>
+    <preferences/>
+  </project>
+</drjava>
