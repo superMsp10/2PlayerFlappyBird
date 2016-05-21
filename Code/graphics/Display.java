@@ -54,23 +54,20 @@ public class Display {
 //  }
 // }
 
-// public void renderSprite(Sprite sprite, int xstart, int ystart, boolean fixed) {
-//  if (fixed) {
-//   xstart -= xOffSet;
-//   ystart -= yOffSet;
-//  }
-//  for (int y = 0; y < sprite.Height; y++) {
-//   int yy = ystart + y;
-//   if (yy >= Main.HEIGHT || yy < 0) continue;
-//
-//   for (int x = 0; x < sprite.Width; x++) {
-//    int xx = xstart + x;
-//    if (xx >= Main.WIDTH || xx < 0) continue;
-//    pixels[xx + yy * Main.WIDTH] = sprite.pixels[x + y * sprite.Size];
-//   }
-//
-//  }
-// }
+ public void renderSprite(Sprite sprite, int xstart, int ystart) {
+
+  for (int y = 0; y < sprite.Height; y++) {
+   int yy = ystart + y;
+   if (yy >= MainFile.HEIGHT || yy < 0) continue;
+
+   for (int x = 0; x < sprite.Width; x++) {
+    int xx = xstart + x;
+    if (xx >= MainFile.WIDTH || xx < 0) continue;
+    pixels[xx + yy * MainFile.WIDTH] = sprite.pixels[x + y * sprite.Size];
+   }
+
+  }
+ }
 //
 // public void renderTile(Tile tile, int xstart, int ystart) {
 //  xstart -= xOffSet;
