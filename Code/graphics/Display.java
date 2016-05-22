@@ -1,5 +1,8 @@
 package graphics;
 import java.util.Random;
+
+import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
+
 import Code.MainFile;
 
 
@@ -63,7 +66,10 @@ public class Display {
    for (int x = 0; x < sprite.Width; x++) {
     int xx = xstart + x;
     if (xx >= MainFile.WIDTH || xx < 0) continue;
-    pixels[xx + yy * MainFile.WIDTH] = sprite.pixels[x + y * sprite.Size];
+    
+    int col = sprite.pixels[x + y * sprite.Size];
+    if(col != 16777215)
+    pixels[xx + yy * MainFile.WIDTH] = col;
    }
 
   }
