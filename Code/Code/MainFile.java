@@ -10,7 +10,6 @@ import Player.*;
 import graphics.*;
 import inputs.*;
 
-
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.image.BufferStrategy;
@@ -36,8 +35,8 @@ public class MainFile extends Canvas implements Runnable {
  
  public static Display SCREEN;
  public DefaultLevel lev = new DefaultLevel();
- public Player p = new Player();
- public static int GRAVITY = 1;
+ public Player p;
+ public static int GRAVITY = 10;
  private Keyboard keyboard;
  private Mouse mouse;
 
@@ -69,6 +68,10 @@ public class MainFile extends Canvas implements Runnable {
   setPreferredSize(size);
   frame = new JFrame();
   SCREEN = new Display();
+  keyboard = Keyboard.defKeyboard;
+  addKeyListener(keyboard);
+  mouse = new Mouse();
+  p = new Player(keyboard);
 
  }
 
@@ -105,6 +108,8 @@ public class MainFile extends Canvas implements Runnable {
  public void update() {
   lev.Update();
   p.Update();
+  keyboard.update();
+
  }
 
  public void render() {
