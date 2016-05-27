@@ -22,7 +22,7 @@ public class Player {
  }
 
  public void Render(Display d) {
-  d.renderSprite(Player, x, y, !right);
+  d.renderPlayer(Player, x, y, !right, false);
  }
 
  public void Update() {

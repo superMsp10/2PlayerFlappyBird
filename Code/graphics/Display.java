@@ -55,7 +55,7 @@ public class Display {
  }
  
  
- public void renderSprite(Sprite sprite, int xstart, int ystart, boolean flip) {
+ public void renderPlayer(Sprite sprite, int xstart, int ystart, boolean flip , boolean tint) {
    
    for (int y = 0; y < sprite.Height; y++) {
      int yy = ystart + y;
@@ -68,8 +68,12 @@ public class Display {
          
          
          int col = sprite.pixels[(sprite.Width - (x + 1)) + y * sprite.Size];
-         if(col != 16777215)
+         if(col != 16777215){
+           if(tint)
            pixels[xx + yy * MainFile.WIDTH] = col;
+           else
+           pixels[xx + yy * MainFile.WIDTH] = 16777215 - col;
+         }
        }
      }else{
        for (int x = 0; x < sprite.Width; x++) {
@@ -78,11 +82,15 @@ public class Display {
          
          
          int col = sprite.pixels[x + y * sprite.Size];
-         if(col != 16777215)
+         if(col != 16777215){
+           if(tint)
            pixels[xx + yy * MainFile.WIDTH] = col;
-       }
+           else
+           pixels[xx + yy * MainFile.WIDTH] = 16777215 - col;
+         }
      }
    }
+ }
  }
 //
 // public void renderTile(Tile tile, int xstart, int ystart) {

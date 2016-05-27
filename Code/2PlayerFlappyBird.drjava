@@ -3,37 +3,37 @@
   <project autorefresh="false" build="../Builds/" main="MainFile" root="" work="">
     <createjar file=""/>
     <source>
-      <file active="true" name="graphics/Display.java" package="graphics" timestamp="27-May-2016 14:32:50">
-        <select from="1347" to="1347"/>
-        <scroll column="725" row="0"/>
-      </file>
-      <file name="graphics/Sprite.java" package="graphics" timestamp="25-May-2016 12:23:40">
-        <select from="1347" to="1347"/>
-        <scroll column="725" row="0"/>
+      <file active="true" name="Player/Player.java" package="Player" timestamp="27-May-2016 14:52:58">
+        <select from="432" to="432"/>
+        <scroll column="107" row="0"/>
       </file>
       <file name="Level/DefaultLevel.java" package="Level" timestamp="25-May-2016 12:32:08">
-        <select from="1347" to="1347"/>
-        <scroll column="725" row="0"/>
+        <select from="432" to="432"/>
+        <scroll column="107" row="0"/>
       </file>
       <file name="Level/Cloud.java" package="Level" timestamp="25-May-2016 13:15:37">
-        <select from="1347" to="1347"/>
-        <scroll column="725" row="0"/>
+        <select from="432" to="432"/>
+        <scroll column="107" row="0"/>
       </file>
       <file name="inputs/Keyboard.java" package="inputs" timestamp="27-May-2016 13:46:28">
-        <select from="1347" to="1347"/>
-        <scroll column="725" row="0"/>
+        <select from="432" to="432"/>
+        <scroll column="107" row="0"/>
       </file>
       <file name="inputs/Mouse.java" package="inputs" timestamp="25-May-2016 13:34:02">
-        <select from="1347" to="1347"/>
-        <scroll column="725" row="0"/>
+        <select from="432" to="432"/>
+        <scroll column="107" row="0"/>
       </file>
-      <file name="Code/MainFile.java" package="Code" timestamp="27-May-2016 14:23:35">
-        <select from="1347" to="1347"/>
-        <scroll column="725" row="0"/>
+      <file name="Code/MainFile.java" package="Code" timestamp="27-May-2016 14:39:35">
+        <select from="432" to="432"/>
+        <scroll column="107" row="0"/>
       </file>
-      <file name="Player/Player.java" package="Player" timestamp="27-May-2016 14:33:27">
-        <select from="1347" to="1347"/>
-        <scroll column="725" row="0"/>
+      <file name="graphics/Sprite.java" package="graphics" timestamp="27-May-2016 14:45:50">
+        <select from="432" to="432"/>
+        <scroll column="107" row="0"/>
+      </file>
+      <file name="graphics/Display.java" package="graphics" timestamp="27-May-2016 14:53:34">
+        <select from="432" to="432"/>
+        <scroll column="107" row="0"/>
       </file>
     </source>
     <included/>
