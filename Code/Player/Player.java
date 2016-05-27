@@ -16,9 +16,11 @@ public class Player {
  boolean jumped = false;
  long jumpedTime = 0;
  boolean right = true;
+ boolean control = false;
 
- public Player(Keyboard k) {
+ public Player(Keyboard k, boolean _control) {
   key = k;
+  control = _control;
  }
 
  public void Render(Display d) {
@@ -38,7 +40,7 @@ public class Player {
    jumpedTime = System.currentTimeMillis();
 
   }
-
+if(control)
   if (key.down) {
    y++;
   }
