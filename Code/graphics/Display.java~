@@ -36,6 +36,27 @@ public class Display {
 
  }
 
+ 
+
+// public void renderPlayer(int xp, int yp, Player player, int flip) {
+//  xp -= xOffSet;
+//  yp -= yOffSet;
+//  for (int y = 0; y < player.sprite.Height; y++) {
+//   int yy = yp + y;
+//   if (yy >= Main.HEIGHT || yy < 0) continue;
+//
+//   for (int x = 0; x < player.sprite.Width; x++) {
+//    int xx = xp + x;
+//    if (xx >= Main.WIDTH || xx < 0) continue;
+//    int col = player.sprite.pixels[x + y * player.sprite.Size];
+//    if (col == 0xFFFEEDBA) continue;
+//    if (col == 0xFFFFFFFF) col = player.col;
+//    pixels[xx + yy * Main.WIDTH] = col;
+//   }
+//
+//  }
+// }
+
  public void renderSprite(Sprite sprite, int xstart, int ystart) {
 
   for (int y = 0; y < sprite.Height; y++) {
@@ -52,37 +73,6 @@ public class Display {
    }
 
   }
- }
- 
- 
- public void renderSprite(Sprite sprite, int xstart, int ystart, boolean flip) {
-   
-   for (int y = 0; y < sprite.Height; y++) {
-     int yy = ystart + y;
-     if (yy >= MainFile.HEIGHT || yy < 0) continue;
-     
-     if(flip){
-       for (int x = 0; x < sprite.Width; x++) {
-         int xx = xstart + x;
-         if (xx >= MainFile.WIDTH || xx < 0) continue;
-         
-         
-         int col = sprite.pixels[(sprite.Width - (x + 1)) + y * sprite.Size];
-         if(col != 16777215)
-           pixels[xx + yy * MainFile.WIDTH] = col;
-       }
-     }else{
-       for (int x = 0; x < sprite.Width; x++) {
-         int xx = xstart + x;
-         if (xx >= MainFile.WIDTH || xx < 0) continue;
-         
-         
-         int col = sprite.pixels[x + y * sprite.Size];
-         if(col != 16777215)
-           pixels[xx + yy * MainFile.WIDTH] = col;
-       }
-     }
-   }
  }
 //
 // public void renderTile(Tile tile, int xstart, int ystart) {

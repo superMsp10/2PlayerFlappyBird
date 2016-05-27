@@ -15,13 +15,14 @@ public class Player {
  float terminalVelocity = 20f;
  boolean jumped = false;
  long jumpedTime = 0;
+ boolean right = true;
 
  public Player(Keyboard k) {
   key = k;
  }
 
  public void Render(Display d) {
-  d.renderSprite(Player, x, y);
+  d.renderSprite(Player, x, y, !right);
  }
 
  public void Update() {
@@ -43,9 +44,11 @@ public class Player {
   }
   if (key.left) {
    x--;
+   right = false;
   }
   if (key.right) {
    x++;
+   right = true;
   }
   //-----------------Gravity----------------//
   if (gravity < MainFile.GRAVITY)
