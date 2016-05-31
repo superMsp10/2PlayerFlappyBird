@@ -18,54 +18,84 @@ public class Player {
  boolean right = true;
  boolean control = false;
 
- public Player(Keyboard k, boolean _control) {
+ public Player(Keyboard k, boolean _control, int _x, int _y) {
   key = k;
   control = _control;
+  x = _x;
+  y = _y;
  }
 
  public void Render(Display d) {
-  d.renderPlayer(Player, x, y, !right, false);
+  d.renderPlayer(Player, x, y, !right, control);
  }
 
  public void Update() {
-
-  //-----------------Movement----------------//
-  if( System.currentTimeMillis() -jumpedTime> 500)
-   jumped = false;
+   
+   //-----------------Movement----------------//
+   if( System.currentTimeMillis() -jumpedTime> 500)
+     jumped = false;
+   
+   
+   if(control){
+     
+     if (key.up && !jumped) {
+       jump();
+     }
+     
+     if (key.down) {
+       y+=2;
+     }
+     if (key.left) {
+       x-=2;
+       right = false;
+     }
+     if (key.right) {
+       x+=2;
+       right = true;
+     }
+     
+   }else{
+     if (key.up1 && !jumped) {
+       jump();
+     }
+     
+     if (key.down1) {
+       y+=2;
+     }
+     if (key.left1) {
+       x-=2;
+       right = false;
+     }
+     if (key.right1) {
+       x+=2;
+       right = true; 
+     }
+     
+   }
+   
+   //-----------------Gravity----------------//
+   if (gravity < MainFile.GRAVITY)
+     gravity = (float) (Math.pow(gravity, 1.005d) + 0.1f);
+   
+   if (momenteumY < terminalVelocity)
+     momenteumY += gravity;
+   
+   //-----------------Pixels----------------//
+   y += momenteumY;
+   
+   if (y > MainFile.HEIGHT) {
+     y = 0;
+   }
+   
+   
+ }
   
-  if (key.up && !jumped) {
-   momenteumY = -10f;
-   gravity = 0;
-   jumped = true;
-   jumpedTime = System.currentTimeMillis();
-
-  }
-if(control)
-  if (key.down) {
-   y++;
-  }
-  if (key.left) {
-   x--;
-   right = false;
-  }
-  if (key.right) {
-   x++;
-   right = true;
-  }
-  //-----------------Gravity----------------//
-  if (gravity < MainFile.GRAVITY)
-   gravity = (float) (Math.pow(gravity, 1.005d) + 0.1f);
-
-  if (momenteumY < terminalVelocity)
-   momenteumY += gravity;
-
-  //-----------------Pixels----------------//
-  y += momenteumY;
-
-  if (y > MainFile.HEIGHT) {
-   y = 0;
-  }
-
+  void jump(){
+      momenteumY = -10f;
+      gravity = 0;
+      jumped = true;
+      jumpedTime = System.currentTimeMillis();
+ 
  }
 
 }

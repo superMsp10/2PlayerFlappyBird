@@ -35,7 +35,8 @@ public class MainFile extends Canvas implements Runnable {
  
  public static Display SCREEN;
  public DefaultLevel lev = new DefaultLevel();
- public Player p;
+ public Player p1;
+ public Player p2;
  public static int GRAVITY = 10;
  private Keyboard keyboard;
  private Mouse mouse;
@@ -71,7 +72,8 @@ public class MainFile extends Canvas implements Runnable {
   keyboard = Keyboard.defKeyboard;
   addKeyListener(keyboard);
   mouse = new Mouse();
-  p = new Player(keyboard);
+  p1 = new Player(keyboard , false, 27, 0 );
+  p2 = new Player(keyboard , true, MainFile.WIDTH - 27, 0 );
 
  }
 
@@ -107,7 +109,8 @@ public class MainFile extends Canvas implements Runnable {
 
  public void update() {
   lev.Update();
-  p.Update();
+  p1.Update();
+  p2.Update();
   keyboard.update();
 
  }
@@ -121,8 +124,8 @@ public class MainFile extends Canvas implements Runnable {
 
   SCREEN.clear();
   lev.Render(SCREEN);
-  p.Render(SCREEN);
-  
+  p1.Render(SCREEN);
+  p2.Render(SCREEN);
   for (int i = 0; i < pixels.length; i++) {
    pixels[i] = SCREEN.pixels[i];
   }
