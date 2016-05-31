@@ -5,11 +5,12 @@ import java.sql.Time;
 import graphics.*;
 import Code.MainFile;
 import inputs.*;
+import java.awt.Rectangle;
 
 public class Player {
  Sprite Player = new Sprite("/Player.png", 34);
  Keyboard key;
- int x, y;
+ public int x, y;
  float gravity = 9.8f;
  float momenteumY = 0;
  float terminalVelocity = 20f;
@@ -17,6 +18,8 @@ public class Player {
  long jumpedTime = 0;
  boolean right = true;
  boolean control = false;
+ public Rectangle r = new Rectangle(0,0,34,34);
+
 
  public Player(Keyboard k, boolean _control, int _x, int _y) {
   key = k;
@@ -31,6 +34,9 @@ public class Player {
 
  public void Update() {
    
+
+   r.x = x;
+   r.y = y;
    //-----------------Movement----------------//
    if( System.currentTimeMillis() -jumpedTime> 500)
      jumped = false;

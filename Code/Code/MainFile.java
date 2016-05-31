@@ -16,6 +16,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class MainFile extends Canvas implements Runnable {
  private static final long serialVersionUID = 1L;
@@ -40,6 +41,7 @@ public class MainFile extends Canvas implements Runnable {
  public static int GRAVITY = 10;
  private Keyboard keyboard;
  private Mouse mouse;
+ public Rectangle rect = new Rectangle(0,0,WIDTH,HEIGHT);
 
  public static void main(String[] args) {
 
@@ -111,9 +113,29 @@ public class MainFile extends Canvas implements Runnable {
   lev.Update();
   p1.Update();
   p2.Update();
+  if(p1.r.intersects(p2.r)){
+   System.out.println("hi"); 
+  }
+  
+  if(!rect.contains(p1.r)){
+    JOptionPane
+      .showMessageDialog(
+                   null,
+                         "Player 1 exited screen");
+  }
+  
   keyboard.update();
 
  }
+ 
+ void reset(){
+  p1. x = 27; 
+    p2. x = MainFile.WIDTH - 27; 
+     p1. y = 0; 
+    p2. y = 0; 
+ }
+ 
+ 
 
  public void render() {
   BufferStrategy bs = getBufferStrategy();
