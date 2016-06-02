@@ -16,6 +16,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class MainFile extends Canvas implements Runnable {
  private static final long serialVersionUID = 1L;
@@ -35,10 +36,12 @@ public class MainFile extends Canvas implements Runnable {
  
  public static Display SCREEN;
  public DefaultLevel lev = new DefaultLevel();
- public Player p;
+ public Player p1;
+ public Player p2;
  public static int GRAVITY = 10;
  private Keyboard keyboard;
  private Mouse mouse;
+ public Rectangle rect = new Rectangle(0,0,WIDTH,HEIGHT);
 
  public static void main(String[] args) {
 
@@ -71,7 +74,8 @@ public class MainFile extends Canvas implements Runnable {
   keyboard = Keyboard.defKeyboard;
   addKeyListener(keyboard);
   mouse = new Mouse();
-  p = new Player(keyboard);
+  p1 = new Player(keyboard , false, 27, 0 );
+  p2 = new Player(keyboard , true, MainFile.WIDTH - 27, 0 );
 
  }
 
@@ -107,10 +111,31 @@ public class MainFile extends Canvas implements Runnable {
 
  public void update() {
   lev.Update();
-  p.Update();
+  p1.Update();
+  p2.Update();
+  if(p1.r.intersects(p2.r)){
+   System.out.println("hi"); 
+  }
+  
+  if(!rect.contains(p1.r)){
+    JOptionPane
+      .showMessageDialog(
+                   null,
+                         "Player 1 exited screen");
+  }
+  
   keyboard.update();
 
  }
+ 
+ void reset(){
+  p1. x = 27; 
+    p2. x = MainFile.WIDTH - 27; 
+     p1. y = 0; 
+    p2. y = 0; 
+ }
+ 
+ 
 
  public void render() {
   BufferStrategy bs = getBufferStrategy();
@@ -121,8 +146,8 @@ public class MainFile extends Canvas implements Runnable {
 
   SCREEN.clear();
   lev.Render(SCREEN);
-  p.Render(SCREEN);
-  
+  p1.Render(SCREEN);
+  p2.Render(SCREEN);
   for (int i = 0; i < pixels.length; i++) {
    pixels[i] = SCREEN.pixels[i];
   }

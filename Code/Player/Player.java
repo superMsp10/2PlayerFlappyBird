@@ -11,13 +11,14 @@ public class Player {
  Sprite Player = new Sprite("/Player.png", 34);
  Keyboard key;
  public int x, y;
- float gravity = 9.8f;
- float momenteumY = 0;
+ public float gravity = 9.8f;
+ public float momenteumY = 0;
  float terminalVelocity = 20f;
  boolean jumped = false;
  long jumpedTime = 0;
  boolean right = true;
  boolean control = false;
+ public boolean doGravity = true;
  public Rectangle r = new Rectangle(0,0,34,34);
 
 
@@ -80,17 +81,15 @@ public class Player {
    }
    
    //-----------------Gravity----------------//
-   if (gravity < MainFile.GRAVITY)
-     gravity = (float) (Math.pow(gravity, 1.005d) + 0.1f);
-   
-   if (momenteumY < terminalVelocity)
-     momenteumY += gravity;
-   
-   //-----------------Pixels----------------//
-   y += momenteumY;
-   
-   if (y > MainFile.HEIGHT) {
-     y = 0;
+   if(doGravity){
+     if (gravity < MainFile.GRAVITY)
+       gravity = (float) (Math.pow(gravity, 1.005d) + 0.1f);
+     
+     if (momenteumY < terminalVelocity)
+       momenteumY += gravity;
+     
+     //-----------------Pixels----------------//
+     y += momenteumY;
    }
    
    

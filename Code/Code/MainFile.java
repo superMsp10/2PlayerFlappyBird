@@ -41,7 +41,12 @@ public class MainFile extends Canvas implements Runnable {
  public static int GRAVITY = 10;
  private Keyboard keyboard;
  private Mouse mouse;
- public Rectangle rect = new Rectangle(0,0,WIDTH,HEIGHT);
+ public Rectangle rect = new Rectangle(0,0,WIDTH + 27,HEIGHT + 27);
+ boolean paused = false
+   
+   
+   
+   ;
 
  public static void main(String[] args) {
 
@@ -102,7 +107,7 @@ public class MainFile extends Canvas implements Runnable {
 
    if (System.currentTimeMillis() - timer > 1000) {
     timer += 1000;
-//    System.out.println(updates);
+
     updates = 0;
    }
   }
@@ -117,11 +122,20 @@ public class MainFile extends Canvas implements Runnable {
    System.out.println("hi"); 
   }
   
-  if(!rect.contains(p1.r)){
+  if(!rect.contains(p1.r) ){
+    reset();
     JOptionPane
       .showMessageDialog(
                    null,
                          "Player 1 exited screen");
+  }
+  
+  if(!rect.contains(p2.r)  ){
+    reset();
+    JOptionPane
+      .showMessageDialog(
+                   null,
+                         "Player 2 exited screen");
   }
   
   keyboard.update();
@@ -129,10 +143,16 @@ public class MainFile extends Canvas implements Runnable {
  }
  
  void reset(){
-  p1. x = 27; 
-    p2. x = MainFile.WIDTH - 27; 
-     p1. y = 0; 
-    p2. y = 0; 
+   p1. x = 0; 
+   p2. x = MainFile.WIDTH - 27; 
+   p1. y = 0; 
+   p2. y = 0; 
+   p2.momenteumY = 0; 
+   p1.doGravity = false; 
+      p2.doGravity = false; 
+   p1.momenteumY = 0; 
+   
+
  }
  
  
