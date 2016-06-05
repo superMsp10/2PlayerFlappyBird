@@ -1,7 +1,5 @@
 package Player;
 
-import java.sql.Time;
-
 import graphics.*;
 import Code.MainFile;
 import inputs.*;
@@ -11,20 +9,20 @@ public class Player {
  Sprite Player = new Sprite("/Player.png", 34);
  Keyboard key;
  public int x, y;
- public float gravity = 9.8f;
+ public float gravity = 4.9f;
  public float momenteumY = 0;
  float terminalVelocity = 20f;
  boolean jumped = false;
  long jumpedTime = 0;
  boolean right = true;
  boolean control = false;
- public boolean doGravity = true;
  public Rectangle r = new Rectangle(0,0,34,34);
 
 
  public Player(Keyboard k, boolean _control, int _x, int _y) {
   key = k;
   control = _control;
+  right = !control;
   x = _x;
   y = _y;
  }
@@ -81,7 +79,6 @@ public class Player {
    }
    
    //-----------------Gravity----------------//
-   if(doGravity){
      if (gravity < MainFile.GRAVITY)
        gravity = (float) (Math.pow(gravity, 1.005d) + 0.1f);
      
@@ -90,7 +87,7 @@ public class Player {
      
      //-----------------Pixels----------------//
      y += momenteumY;
-   }
+   
    
    
  }

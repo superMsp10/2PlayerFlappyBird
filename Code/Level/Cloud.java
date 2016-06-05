@@ -6,7 +6,7 @@ import graphics.Sprite;
 
 public class Cloud {
 
- Sprite s = new Sprite("/Cloud.png", 50);
+ public static Sprite s = new Sprite("/Cloud.png", 50);
  int speed;
 
  int x;

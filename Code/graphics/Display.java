@@ -1,7 +1,6 @@
 package graphics;
 import java.util.Random;
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
 
 import Code.MainFile;
 
@@ -47,8 +46,9 @@ public class Display {
     if (xx >= MainFile.WIDTH || xx < 0) continue;
     
     int col = sprite.pixels[x + y * sprite.Size];
-    if(col != 16777215)
+    if(col != -16777216)
     pixels[xx + yy * MainFile.WIDTH] = col;
+
    }
 
   }
@@ -68,7 +68,7 @@ public class Display {
          
          
          int col = sprite.pixels[(sprite.Width - (x + 1)) + y * sprite.Size];
-         if(col != 16777215){
+         if(col != -16777216){
            if(tint)
            pixels[xx + yy * MainFile.WIDTH] = col;
            else
@@ -82,7 +82,7 @@ public class Display {
          
          
          int col = sprite.pixels[x + y * sprite.Size];
-         if(col != 16777215){
+         if(col != -16777216){
            if(tint)
            pixels[xx + yy * MainFile.WIDTH] = col;
            else
@@ -92,32 +92,5 @@ public class Display {
    }
  }
  }
-//
-// public void renderTile(Tile tile, int xstart, int ystart) {
-//  xstart -= xOffSet;
-//  ystart -= yOffSet;
-//  for (int y = 0; y < tile.sprite.Height; y++) {
-//   int yy = ystart + y;
-//
-//   for (int x = 0; x < tile.sprite.Width; x++) {
-//    int xx = xstart + x;
-//    if (xx < -tile.sprite.Size || xx >= Main.WIDTH || yy < -tile.sprite.Size || yy >= Main.HEIGHT) break;
-//    if (xx < 0) xx = 0;
-//    if (yy < 0) yy = 0;
-//    pixels[xx + yy * Main.WIDTH] = tile.sprite.pixels[x + y * tile.sprite.Size];
-//   }
-//
-//  }
-// }
-//
-// public void renderProjectile(int xp, int yp, Sprite sprite) {
-//
-// }
-//
-// public void setOffSet(int x, int y) {
-//  xOffSet = x;
-//  yOffSet = y;
-//
-// }
 
 }

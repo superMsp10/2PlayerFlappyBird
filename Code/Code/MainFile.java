@@ -1,7 +1,5 @@
 package Code;
 
-
-
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 
@@ -12,6 +10,7 @@ import inputs.*;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.TrayIcon.MessageType;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -19,181 +18,192 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class MainFile extends Canvas implements Runnable {
- private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
- public static int WIDTH = 400;
- public static int HEIGHT = 300;
- public static int SCALE = 2;
+	public static int WIDTH = 400;
+	public static int HEIGHT = 300;
+	public static int SCALE = 2;
 
- public boolean running = false;
+	public boolean running = false;
 
- JFrame frame;
- private Thread thread;
- private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
-                                                 BufferedImage.TYPE_INT_RGB);
- private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer())
-   .getData();
- 
- public static Display SCREEN;
- public DefaultLevel lev = new DefaultLevel();
- public Player p1;
- public Player p2;
- public static int GRAVITY = 10;
- private Keyboard keyboard;
- private Mouse mouse;
- public Rectangle rect = new Rectangle(0,0,WIDTH + 27,HEIGHT + 27);
- boolean paused = false
-   
-   
-   
-   ;
+	JFrame frame;
+	private Thread thread;
+	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
+			BufferedImage.TYPE_INT_RGB);
+	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer())
+			.getData();
 
- public static void main(String[] args) {
+	public static Display SCREEN;
+	public DefaultLevel lev = new DefaultLevel();
+	public Player p1;
+	public Player p2;
+	public static int GRAVITY = 10;
+	private Keyboard keyboard;
+	public Rectangle rect = new Rectangle(0, 0, WIDTH + 27, HEIGHT + 27);
+	boolean paused = false;
+	public Sprite winScreen = Sprite.p1Wins;
 
-  String controls = "-------Player 1-----------//CONTROLS//-------Player 2-----------------\n"
-    + "JUMP:---Space------------------||------------Up Arrow------------------\n";
+	public static void main(String[] args) {
 
-  JOptionPane
-    .showMessageDialog(
-      null,
-      "Welcome to 2 Player Flappy Bird \nMade by Mahan Pandey \n Press OK to continue\n"
-        + controls);
+		String controls = "-------Player 1-----------//CONTROLS//-------Player 2-----------------\n"
+				+ "Left:------------A------------------||------------Left Arrow------------------\n"
+				+ "Right:----------D------------------||------------Right Arrow------------------\n"
+				+ "Jump:----------Space------------------||------------Up Arrow------------------\n\n"
+				+ "Objective: Get on top of the other player and land on their head\n"
+				+ "Rules: If you exit the screen the other player wins\n";
 
-  MainFile main = new MainFile();
-  main.frame.setResizable(false);
-  main.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  main.frame.add(main);
-  main.frame.pack();
-  main.frame.setLocationRelativeTo(null);
-  main.frame.setVisible(true);
-  main.frame.setTitle("2PlayerFlappyBird");
-  main.start();
+		JOptionPane.showMessageDialog(null,
+				"Welcome to 2 Player Flappy Bird \nMade by Mahan Pandey \n\n"
+						+ controls + " Press OK to continue\n", "2 Player Flappy Bird", JOptionPane.PLAIN_MESSAGE);
 
- }
+		MainFile main = new MainFile();
+		main.frame.setResizable(false);
+		main.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		main.frame.add(main);
+		main.frame.pack();
+		main.frame.setLocationRelativeTo(null);
+		main.frame.setVisible(true);
+		main.frame.setTitle("2PlayerFlappyBird");
+		main.start();
 
- public MainFile() {
-  Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
-  setPreferredSize(size);
-  frame = new JFrame();
-  SCREEN = new Display();
-  keyboard = Keyboard.defKeyboard;
-  addKeyListener(keyboard);
-  mouse = new Mouse();
-  p1 = new Player(keyboard , false, 27, 0 );
-  p2 = new Player(keyboard , true, MainFile.WIDTH - 27, 0 );
+	}
 
- }
+	public MainFile() {
+		Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
+		setPreferredSize(size);
+		frame = new JFrame();
+		SCREEN = new Display();
+		keyboard = Keyboard.defKeyboard;
+		addKeyListener(keyboard);
+		p1 = new Player(keyboard, false, 27, 42);
+		p2 = new Player(keyboard, true, MainFile.WIDTH - 27, 42);
+		requestFocus();
 
- public void run() {
-  
-  long timer = System.currentTimeMillis();
-  long lastTime = System.nanoTime();
-  int updates = 0;
+	}
 
-  final double wantedUpdates = 1000000000.0 / 30.0;
-  double delta = 0;
-  while (running) {
+	public void run() {
 
-   render();
-   long now = System.nanoTime();
-   delta += (now - lastTime) / wantedUpdates;
-   lastTime = now;
+		long timer = System.currentTimeMillis();
+		long lastTime = System.nanoTime();
 
-   while (delta >= 1) {
-    update();
-    updates++;
-    delta--;
-   }
+		final double wantedUpdates = 1000000000.0 / 30.0;
+		double delta = 0;
+		while (running) {
 
-   if (System.currentTimeMillis() - timer > 1000) {
-    timer += 1000;
+			render();
+			long now = System.nanoTime();
+			delta += (now - lastTime) / wantedUpdates;
+			lastTime = now;
 
-    updates = 0;
-   }
-  }
+			while (delta >= 1) {
+				update();
+				delta--;
+			}
 
- }
+			if (System.currentTimeMillis() - timer > 1000) {
+				timer += 1000;
+			}
+		}
 
- public void update() {
-  lev.Update();
-  p1.Update();
-  p2.Update();
-  if(p1.r.intersects(p2.r)){
-   System.out.println("hi"); 
-  }
-  
-  if(!rect.contains(p1.r) ){
-    reset();
-    JOptionPane
-      .showMessageDialog(
-                   null,
-                         "Player 1 exited screen");
-  }
-  
-  if(!rect.contains(p2.r)  ){
-    reset();
-    JOptionPane
-      .showMessageDialog(
-                   null,
-                         "Player 2 exited screen");
-  }
-  
-  keyboard.update();
+	}
 
- }
- 
- void reset(){
-   p1. x = 0; 
-   p2. x = MainFile.WIDTH - 27; 
-   p1. y = 0; 
-   p2. y = 0; 
-   p2.momenteumY = 0; 
-   p1.doGravity = false; 
-      p2.doGravity = false; 
-   p1.momenteumY = 0; 
-   
+	public void update() {
 
- }
- 
- 
+		keyboard.update();
+		lev.Update();
 
- public void render() {
-  BufferStrategy bs = getBufferStrategy();
-  if (bs == null) {
-   createBufferStrategy(3);
-   return;
-  }
+		// if not paused
+		if (!paused) {
+			p1.Update();
+			p2.Update();
 
-  SCREEN.clear();
-  lev.Render(SCREEN);
-  p1.Render(SCREEN);
-  p2.Render(SCREEN);
-  for (int i = 0; i < pixels.length; i++) {
-   pixels[i] = SCREEN.pixels[i];
-  }
-  
-  Graphics g = bs.getDrawGraphics();
-  g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-  g.dispose();
-  bs.show();
- }
+			if (p1.r.intersects(p2.r)) {
+				System.out.println("hi");
+			}
 
- private void start() {
-  running = true;
-  thread = new Thread(this, "Display");
-  thread.start();
+			if (!rect.contains(p1.r)) {
+				reset(true);
+				winScreen = Sprite.p2Wins;
+				System.out.println("Player 1 exited screen");
 
- }
+			}
+			if (!rect.contains(p2.r)) {
+				if (!paused) {
+					reset(true);
+					winScreen = Sprite.p1Wins;
+					System.out.println("Player 2 exited screen");
+				} else {
+					reset(false);
 
- public synchronized void stop() {
+					System.out
+							.println("Both Player 2 and Player 1 exited screen");
+				}
 
-  running = false;
-  try {
-   thread.join();
-  } catch (InterruptedException e) {
-   e.printStackTrace();
-  }
+			}
 
- }
+			// if paused
+		} else {
+			if (keyboard.reset) {
+				paused = false;
+				keyboard.resetKeys();
+			}
+		}
+
+	}
+
+	void reset(boolean p) {
+		p1.x = 27;
+		p2.x = MainFile.WIDTH - 42;
+		p1.y = 42;
+		p2.y = 42;
+		p2.momenteumY = 0;
+		p1.momenteumY = 0;
+
+		paused = p;
+
+	}
+
+	public void render() {
+		BufferStrategy bs = getBufferStrategy();
+		if (bs == null) {
+			createBufferStrategy(3);
+			return;
+		}
+
+		SCREEN.clear();
+		lev.Render(SCREEN);
+		p1.Render(SCREEN);
+		p2.Render(SCREEN);
+		if (paused) {
+			SCREEN.renderSprite(winScreen, 0, 0);
+
+		}
+		for (int i = 0; i < pixels.length; i++) {
+			pixels[i] = SCREEN.pixels[i];
+		}
+
+		Graphics g = bs.getDrawGraphics();
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		g.dispose();
+		bs.show();
+	}
+
+	private void start() {
+		running = true;
+		thread = new Thread(this, "Display");
+		thread.start();
+
+	}
+
+	public synchronized void stop() {
+
+		running = false;
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 }

@@ -16,21 +16,10 @@ public class Sprite {
  public final int Size;
  public int col;
  private String path;
-// //Tiles
-// public static Sprite NULLSPRITE = new Sprite(Main.FLOORS, 1, 0, 8);
-//
-// public static Sprite MARBLE = new Sprite(Main.FLOORS, 0, 1, 8);
-// public static Sprite wetMARBLE = new Sprite(Main.FLOORS, 2, 1, 8);
-// public static Sprite TiantedMARBLE = new Sprite(Main.FLOORS, 0, 0, 8);
-// public static Sprite boosterMarkMARBLE = new Sprite(Main.FLOORS, 4, 0, 8);
-//
-// public static Sprite BARRACADE = new Sprite(Main.FLOORS, 2, 0, 8);
-// //Mobs
-// public static Sprite Player = new Sprite(Main.PLAYER, 0, 0, 16);
-// public static Sprite Stamina = new Sprite(2000000, 2, 1);
-// public static Sprite Health = new Sprite(0xFFD4D4F, 2, 1);
-// //Menus
-// public static Sprite MainMenu = new Sprite(Main.MainMenus, 0, 0, Main.WIDTH,Main.HEIGHT);
+
+ public static Sprite p1Wins = new Sprite("/P1Wins.png", 400);
+ public static Sprite p2Wins = new Sprite("/P2Wins.png", 400);
+
 
  public Sprite(String path, int size) {
   Size = size;
@@ -39,19 +28,12 @@ public class Sprite {
   this.path = path;
   pixels = new int[size * size];
   load();
+  System.out.println("pixel@ 0,0 : " + pixels[0] + path);
+
+
  }
 
 
- public Sprite(int col, int width, int height) {
-  this.x = x * width;
-  this.y = y * height;
-  this.col = col;
-  Size = width;
-  Width = width;
-  Height = height;
-  pixels = new int[width * height];
-  loadCol();
- }
 
  
  private void load() {
@@ -66,16 +48,5 @@ public class Sprite {
 
  }
  
-
-
- private void loadCol() {
-  for (int y = 0; y < Height; y++) {
-   for (int x = 0; x < Width; x++) {
-    pixels[x + y * Width] = col;
-   }
-
-  }
-
- }
 
 }
