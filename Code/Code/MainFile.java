@@ -54,7 +54,8 @@ public class MainFile extends Canvas implements Runnable {
 
 		JOptionPane.showMessageDialog(null,
 				"Welcome to 2 Player Flappy Bird \nMade by Mahan Pandey \n\n"
-						+ controls + " Press OK to continue\n", "2 Player Flappy Bird", JOptionPane.PLAIN_MESSAGE);
+						+ controls + " Press OK to continue\n",
+				"2 Player Flappy Bird", JOptionPane.PLAIN_MESSAGE);
 
 		MainFile main = new MainFile();
 		main.frame.setResizable(false);
@@ -118,7 +119,15 @@ public class MainFile extends Canvas implements Runnable {
 			p2.Update();
 
 			if (p1.r.intersects(p2.r)) {
-				System.out.println("hi");
+				if (p1.y > p2.y) {
+					reset(true);
+					winScreen = Sprite.p1Wins;
+					System.out.println("Player 1 landed on top");
+				} else {
+					reset(true);
+					winScreen = Sprite.p2Wins;
+					System.out.println("Player 2 landed on top");
+				}
 			}
 
 			if (!rect.contains(p1.r)) {
