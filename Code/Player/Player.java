@@ -25,6 +25,8 @@ public class Player {
   right = !control;
   x = _x;
   y = _y;
+  
+  jumpedTime = System.currentTimeMillis();
  }
 
  public void Render(Display d) {
@@ -37,7 +39,7 @@ public class Player {
    r.x = x;
    r.y = y;
    //-----------------Movement----------------//
-   if( System.currentTimeMillis() -jumpedTime> 500)
+   if( System.currentTimeMillis() - jumpedTime> 500)
      jumped = false;
    
    
